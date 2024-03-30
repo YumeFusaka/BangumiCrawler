@@ -1,0 +1,24 @@
+spring.application.name: bangumi_crawler
+
+server:
+  port: 8080
+
+spring:
+  main:
+    allow-circular-references: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bangumi?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: j
+
+
+mybatis-plus:
+  type-aliases-package: com.bangumi_crawler.pojo # ?????
+  mapper-locations: "classpath*:/mapper/**/*.xml" # Mapper.xml????????
+  configuration:
+    map-underscore-to-camel-case: true # ?????????????
+    cache-enabled: false # ????????
+  global-config:
+    db-config:
+      update-strategy: not_null # ????????????
