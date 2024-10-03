@@ -21,14 +21,14 @@ public class GameServiceImpl extends ServiceImpl<GameMapper, Game> implements IG
     @Override
     public void saveData(Game game) {
         QueryWrapper<Game> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name", game.getName());
+        queryWrapper.eq("subject_id", game.getSubjectId());
         List<Game> games = gameMapper.selectList(queryWrapper);
-        if(games.isEmpty())
+        if (games.isEmpty())
             gameMapper.insert(game);
         else {
             UpdateWrapper<Game> updateWrapper = new UpdateWrapper<>();
-            updateWrapper.eq("name", game.getName());
-            gameMapper.update(game,updateWrapper);
+            updateWrapper.eq("subject_id", game.getName());
+            gameMapper.update(game, updateWrapper);
         }
 
     }

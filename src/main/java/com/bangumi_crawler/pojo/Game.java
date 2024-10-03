@@ -12,7 +12,7 @@ import lombok.Data;
 @Builder
 public class Game {
 
-    @TableId(value="id",type= IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     Long id;
 
     @TableField("name")
@@ -29,4 +29,10 @@ public class Game {
 
     @TableField("votes")
     String votes;
+
+    @TableField("nick")
+    String nick;
+
+    @TableField("subject_id")
+    Long subjectId;
 }

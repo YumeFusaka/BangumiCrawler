@@ -54,6 +54,8 @@ public class BangumiProcessor implements PageProcessor {
                 .score(selectable.css("small.fade", "text").toString())
                 .votes(selectable.css("span.tip_j", "text").toString())
                 .rank(selectable.css(".rank", "text").toString())
+                .nick(selectable.css("small.grey", "text").toString())
+                .subjectId(Long.valueOf(selectable.css("a", "href").toString().split("/")[2]))
                 .build();
         IGameService gameService = BeanUtils.getBean(IGameService.class);
         gameService.saveData(game);
