@@ -8,9 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@TableName("game")
+@TableName("galgame")
 @Builder
-public class Game {
+public class GalGame {
 
     @TableId(value = "id", type = IdType.AUTO)
     Long id;
@@ -22,10 +22,10 @@ public class Game {
     String info;
 
     @TableField("score")
-    String score;
+    Double score;
 
     @TableField("`rank`")
-    String rank;
+    Long rank;
 
     @TableField("votes")
     String votes;

@@ -1,10 +1,9 @@
 package com.bangumi_crawler.task;
 
 import com.bangumi_crawler.controller.ShutdownController;
-import com.bangumi_crawler.pojo.Game;
-import com.bangumi_crawler.service.IGameService;
+import com.bangumi_crawler.pojo.GalGame;
+import com.bangumi_crawler.service.IGalGameService;
 import com.bangumi_crawler.utils.BeanUtils;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -48,22 +47,30 @@ public class BangumiProcessor implements PageProcessor {
     }
 
     public void saveInfo(Selectable selectable) {
-        Game game = Game.builder()
+        GalGame game = GalGame.builder()
                 .name(selectable.css(".inner .l", "text").toString())
                 .info(selectable.css(".info.tip", "text").toString())
-                .score(selectable.css("small.fade", "text").toString())
                 .votes(selectable.css("span.tip_j", "text").toString())
-                .rank(selectable.css(".rank", "text").toString())
                 .nick(selectable.css("small.grey", "text").toString())
                 .subjectId(Long.valueOf(selectable.css("a", "href").toString().split("/")[2]))
                 .build();
-        IGameService gameService = BeanUtils.getBean(IGameService.class);
+        if (selectable.css("small.fade", "text").toString() == null) {
+            game.setScore(null);
+        } else {
+            game.setScore(Double.valueOf(selectable.css("small.fade", "text").toString()));
+        }
+        if (selectable.css(".rank", "text").toString() == null) {
+            game.setRank(null);
+        } else {
+            game.setRank(Long.valueOf(selectable.css(".rank", "text").toString()));
+        }
+        IGalGameService gameService = BeanUtils.getBean(IGalGameService.class);
         gameService.saveData(game);
     }
 
     private Site site = Site.me()
             .setCharset("UTF-8")
-            .setSleepTime(1)
+            .setSleepTime(0)
             .setTimeOut(10 * 1000)
             .setRetrySleepTime(3000)
             .setRetryTimes(3);
