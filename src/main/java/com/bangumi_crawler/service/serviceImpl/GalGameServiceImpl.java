@@ -26,7 +26,7 @@ public class GalGameServiceImpl extends ServiceImpl<GalGameMapper, GalGame> impl
             gameMapper.insert(game);
         else {
             UpdateWrapper<GalGame> updateWrapper = new UpdateWrapper<>();
-            updateWrapper.eq("subject_id", game.getName());
+            updateWrapper.eq("subject_id", game.getSubjectId());
             gameMapper.update(game, updateWrapper);
         }
 

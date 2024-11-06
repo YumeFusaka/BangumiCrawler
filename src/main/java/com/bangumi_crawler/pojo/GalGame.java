@@ -13,26 +13,23 @@ import lombok.Data;
 public class GalGame {
 
     @TableId(value = "id", type = IdType.AUTO)
-    Long id;
+    private Long id;
 
-    @TableField("name")
-    String name;
+    private String translatedName;
 
-    @TableField("info")
-    String info;
+    private String info;
 
-    @TableField("score")
-    Double score;
+    private Double score;
 
     @TableField("`rank`")
-    Long rank;
+    private Long rank;
 
-    @TableField("votes")
-    String votes;
+    private String numberOfRatings;
 
-    @TableField("nick")
-    String nick;
+    private Long subjectId;
 
-    @TableField("subject_id")
-    Long subjectId;
+    private String originalName;
+
+    private String imgUrl;
 }
+

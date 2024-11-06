@@ -48,10 +48,10 @@ public class BangumiProcessor implements PageProcessor {
 
     public void saveInfo(Selectable selectable) {
         GalGame game = GalGame.builder()
-                .name(selectable.css(".inner .l", "text").toString())
+                .translatedName(selectable.css(".inner .l", "text").toString())
                 .info(selectable.css(".info.tip", "text").toString())
-                .votes(selectable.css("span.tip_j", "text").toString())
-                .nick(selectable.css("small.grey", "text").toString())
+                .numberOfRatings(selectable.css("span.tip_j", "text").toString())
+                .originalName(selectable.css("small.grey", "text").toString())
                 .subjectId(Long.valueOf(selectable.css("a", "href").toString().split("/")[2]))
                 .build();
         if (selectable.css("small.fade", "text").toString() == null) {
