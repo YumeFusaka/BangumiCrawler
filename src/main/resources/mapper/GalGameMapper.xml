@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bangumi_crawler.mapper.GalGameMapper">
+    <insert id="insertOrUpdate">
+        INSERT INTO galgame
+        (subject_id, translated_name, original_name, info, number_of_ratings, score, `rank`)
+        VALUES (#{subjectId}, #{translatedName}, #{originalName}, #{info}, #{numberOfRatings}, #{score}, #{rank})
+        ON DUPLICATE KEY UPDATE translated_name   = VALUES(translated_name),
+                                original_name     = VALUES(original_name),
+                                info              = VALUES(info),
+                                number_of_ratings = VALUES(number_of_ratings),
+                                score             = VALUES(score),
+                                `rank`            = VALUES(`rank`)
+    </insert>
+</mapper>
