@@ -1,24 +1,33 @@
-spring.application.name: bangumi_crawler
-
-server:
-  port: 8080
-
 spring:
-  main:
-    allow-circular-references: true
+  application:
+    name: bangumi_crawler
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/game_and_love?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: yumefusaka
     password: j
 
+server:
+  port: 8080
 
 mybatis-plus:
-  type-aliases-package: com.bangumi_crawler.pojo # ?????
-  mapper-locations: "classpath*:/mapper/**/*.xml" # Mapper.xml????????
+  mapper-locations: "classpath*:/mapper/**/*.xml"
   configuration:
-    map-underscore-to-camel-case: true # ?????????????
-    cache-enabled: false # ????????
-  global-config:
-    db-config:
-      update-strategy: not_null # ????????????
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+# bangumi 抓取配置
+bangumi:
+  proxy:
+    host: 127.0.0.1 # 代理主机，置空则直连
+    port: 7890
+  cookie: "" # 登录 cookie（bangumi.tv 域下 chii_auth+chii_sec_id+chii_sid 全套），私密配置放 application-local.yml（已 gitignore，不入库）；置空则匿名访问
+  list:
+    enabled: true   # 是否在启动时抓取列表（测试时可关）
+    threads: 8      # 列表页并发窗口大小
+    sleep-ms: 300   # 每页抓取后的休眠，控制对站点压力
+  image:
+    threads: 16     # 封面兜底抓取并发数（列表页拿不到封面的少数条目走这里）
+    sleep-ms: 300
+    initial-delay-ms: 120000   # 启动后先让列表抓取跑一段时间
+    fixed-delay-ms: 100000     # 每轮封面抓取的间隔

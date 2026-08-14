@@ -6,5 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface GalGameMapper extends BaseMapper<GalGame> {
-    void insertOrUpdate(GalGame game);
+    /** 按 subject_id 唯一键插入或更新（SQL 见 GalGameMapper.xml） */
+    void upsert(GalGame game);
 }

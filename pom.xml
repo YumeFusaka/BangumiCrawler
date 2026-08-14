@@ -12,7 +12,7 @@
     <artifactId>bangumi_crawler</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>bangumi_crawler</name>
-    <description>bangumi_crawler</description>
+    <description>bangumi galgame 条目与封面图片抓取</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -38,43 +38,19 @@
             <scope>test</scope>
         </dependency>
 
-        <!--WebMagic核心包-->
-        <dependency>
-            <groupId>us.codecraft</groupId>
-            <artifactId>webmagic-core</artifactId>
-            <version>0.10.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!--WebMagic扩展-->
-        <dependency>
-            <groupId>us.codecraft</groupId>
-            <artifactId>webmagic-extension</artifactId>
-            <version>0.10.0</version>
-        </dependency>
-        <!--WebMagic对布隆过滤器的支持-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>16.0</version>
-        </dependency>
-
-        <!--MybatisPlus-->
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.5</version>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+            <!-- 旧项目用的 mybatis-plus-boot-starter 只适用于 Spring Boot 2（自带 mybatis-spring 2.1.2），
+                 升级 Boot 3 后必须换 boot3 专用 starter，否则上下文无法加载 -->
+            <version>3.5.7</version>
         </dependency>
+        <!-- HTML 解析 -->
         <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>3.0.3</version>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.17.2</version>
         </dependency>
-
     </dependencies>
 
     <build>

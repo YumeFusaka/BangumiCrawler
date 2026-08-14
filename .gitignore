@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# 本地私密配置（登录 cookie 等），不入库
+src/main/resources/application-local.yml
