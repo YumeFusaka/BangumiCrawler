@@ -39,6 +39,23 @@ class GalGameListCrawlerTest {
     }
 
     @Test
+    void collectedItemStatusDoesNotOverwriteName() {
+        // 收藏过的条目：.inner 内标题 h3 之前有 collectBlock，状态链接 class="l" 文本为「已玩过」
+        String collectBlock = """
+                <div id="collectBlock_1126" class="collectBlock tip_i" data-subject-id="1126">
+                    <p class="collectModify">
+                        <a href="/update/1126?TB_iframe=true" title="修改收藏" class="thickbox l">已玩过</a> | <a href="#;" class="l">X</a>
+                    </p>
+                </div>
+                """;
+        String html = ITEM.replace("<h3>", collectBlock + "<h3>");
+
+        GalGame game = crawler.parse(Jsoup.parse(html).selectFirst("li"));
+
+        assertThat(game.getTranslatedName()).isEqualTo("时空轮回");
+    }
+
+    @Test
     void noIconPlaceholderMeansNoCover() {
         String html = ITEM.replace("src=\"//lain.bgm.tv/r/400/pic/cover/l/ff/ee/1126_wtoHO.jpg\"", "src=\"/img/no_icon_subject.png\"");
 

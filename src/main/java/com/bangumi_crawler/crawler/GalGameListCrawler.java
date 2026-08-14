@@ -100,7 +100,8 @@ public class GalGameListCrawler {
         if (subjectId == null) return null;
         return GalGame.builder()
                 .subjectId(subjectId)
-                .translatedName(firstText(item, ".inner .l"))
+                // 钉死到 h3：收藏过的条目在 .inner 里会有 collectBlock（收藏状态链接也是 class="l" 且排在标题前）
+                .translatedName(firstText(item, ".inner h3 a.l"))
                 .info(firstText(item, ".info.tip"))
                 .numberOfRatings(firstText(item, "span.tip_j"))
                 .originalName(firstText(item, "small.grey"))
